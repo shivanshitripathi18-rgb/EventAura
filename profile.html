@@ -581,15 +581,75 @@
       "Details updated on this page. Connect a secure backend to save changes permanently.";
   });
 
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    const confirmed = confirm("Do you want to log out?");
+  
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  const confirmed = confirm("Do you want to log out?");
 
-    if (confirmed) {
-      alert("This demo profile does not have an authentication system connected yet.");
+  if (!confirmed) return;
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn.disabled = true;
+  logoutBtn.textContent = "Logging out...";
+
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8080/api/auth/logout",
+      {
+        method: "POST",
+        credentials: "include"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Logout request failed");
     }
-  });
 
-  updateSidebar();
+    window.location.href = "/index.html";
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("Logout nahi ho paya. Backend check karke dobara try karo.");
+
+    logoutBtn.disabled = false;
+    logoutBtn.innerHTML = "↪ &nbsp; Log Out";
+  }
+});
+
+async function loadProfile() {
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8080/api/auth/me",
+      { credentials: "include" }
+    );
+
+    if (!response.ok) {
+      document.getElementById("sidebarName").textContent = "Please Log In";
+      document.getElementById("sidebarEmail").textContent =
+        "Sign in to view your profile";
+      return;
+    }
+
+    const result = await response.json();
+    const user = result.user;
+
+    document.getElementById("fullName").value =
+      user.name || user.fullName || "";
+
+    document.getElementById("email").value = user.email || "";
+
+    document.getElementById("phone").value = user.phone || "";
+    document.getElementById("city").value = user.city || "";
+    document.getElementById("address").value = user.address || "";
+
+    updateSidebar();
+  } catch (error) {
+    console.error("Profile loading error:", error);
+    document.getElementById("sidebarName").textContent =
+      "Unable to load profile";
+  }
+}
+
+loadProfile();
+
 </script>
 
 </body>

@@ -11,3 +11,4 @@ backend/target/
 .env
 .env.*
 !*.env.example
+desktop.ini

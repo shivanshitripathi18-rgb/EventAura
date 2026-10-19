@@ -1,6 +1,6 @@
 "use strict";
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "http://127.0.0.1:8080/api";
 
 // =========================================
 // 1. HELPER FUNCTIONS
@@ -696,3 +696,36 @@ if (profileAvatar) {
 
 // Page load par login status check karo
 updateNavbarAuth();
+
+// EventAura mobile navbar toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (!menuToggle || !navLinks) return;
+
+  menuToggle.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!navLinks.contains(event.target) &&
+        !menuToggle.contains(event.target)) {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    }
+  });
+});

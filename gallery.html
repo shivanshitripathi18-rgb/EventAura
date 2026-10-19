@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Gallery | EventAura</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --gold: #b88a54;
+      --dark: #25211e;
+      --cream: #faf7f2;
+      --muted: #77716b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--dark);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* GALLERY HERO */
+
+    .gallery-hero {
+      min-height: 380px;
+      padding: 80px 7%;
+      background: linear-gradient(120deg, #211d1a, #45352a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      color: #d7b187;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 17px;
+    }
+
+    .gallery-hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: normal;
+      margin: 0 0 18px;
+      animation: revealText .8s ease both;
+    }
+
+    .gallery-hero h1 span {
+      color: #d8b187;
+      font-style: italic;
+    }
+
+    .gallery-hero p {
+      max-width: 570px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #e0d7cf;
+      margin: 0;
+      animation: revealText .8s .2s ease both;
+    }
+
+    @keyframes revealText {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MAIN GALLERY */
+
+    .gallery-section {
+      max-width: 1400px;
+      padding: 75px 6%;
+      margin: auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: normal;
+      margin: 10px 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* FILTER BUTTONS */
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 35px 0 40px;
+    }
+
+    .filter-btn {
+      border: 1px solid #ded4c7;
+      background: transparent;
+      color: #51473e;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: .3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+
+    /* PHOTO GRID */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 270px;
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: #e9dfd3;
+      cursor: pointer;
+      animation: photoReveal .7s ease both;
+    }
+
+    .gallery-item:nth-child(2) { animation-delay: .08s; }
+    .gallery-item:nth-child(3) { animation-delay: .16s; }
+    .gallery-item:nth-child(4) { animation-delay: .24s; }
+    .gallery-item:nth-child(5) { animation-delay: .32s; }
+    .gallery-item:nth-child(6) { animation-delay: .40s; }
+
+    @keyframes photoReveal {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.09);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: white;
+      background: linear-gradient(
+        transparent 35%,
+        rgba(20, 16, 13, .78)
+      );
+      opacity: 0;
+      transition: opacity .35s;
+    }
+
+    .gallery-item:hover .gallery-overlay,
+    .gallery-item:focus-visible .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay span {
+      color: #e4c399;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .gallery-overlay h3 {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    /* FEATURE PHOTO SIZES */
+
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+
+    /* EMPTY MESSAGE */
+
+    .empty-message {
+      display: none;
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 0;
+    }
+
+    /* PHOTO PREVIEW MODAL */
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      padding: 25px;
+      background: rgba(15, 13, 11, .94);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open {
+      display: flex;
+      animation: fadeIn .25s ease;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 82vh;
+      object-fit: contain;
+      box-shadow: 0 15px 60px rgba(0, 0, 0, .3);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 38px;
+      cursor: pointer;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 20px;
+      color: white;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* CONTACT CTA */
+
+    .gallery-cta {
+      text-align: center;
+      background: #eee5d9;
+      padding: 75px 20px;
+    }
+
+    .gallery-cta h2 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: clamp(30px, 4vw, 45px);
+      margin: 10px 0 15px;
+    }
+
+    .gallery-cta p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .gold-btn {
+      display: inline-block;
+      padding: 15px 24px;
+      background: var(--gold);
+      color: white;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid var(--gold);
+      transition: .3s;
+    }
+
+    .gold-btn:hover {
+      background: transparent;
+      color: var(--dark);
+    }
+
+    footer {
+      background: #211d1a;
+      color: #d9d0c8;
+      text-align: center;
+      padding: 28px 15px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 240px;
+      }
+
+      .gallery-item.wide {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .gallery-hero {
+        min-height: 320px;
+        padding: 60px 6%;
+      }
+
+      .gallery-section {
+        padding: 50px 5%;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 280px;
+      }
+
+      .gallery-item.tall,
+      .gallery-item.wide {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .gallery-overlay {
+        opacity: 1;
+      }
+
+      .lightbox img {
+        max-width: 100%;
+        max-height: 75vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo">EventAura<span>.</span></a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="services.html">Services</a>
+        <a href="/packages.html">Packages</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="gallery-hero">
+    <span class="eyebrow">Our Portfolio</span>
+
+    <h1>Moments Made <span>Beautiful.</span></h1>
+
+    <p>
+      Every picture tells a story. Explore our collection of celebrations,
+      creative decorations and unforgettable event experiences.
+    </p>
+  </section>
+
+  <!-- GALLERY -->
+  <main>
+    <section class="gallery-section">
+
+      <div class="section-heading">
+        <span class="eyebrow">The EventAura Gallery</span>
+        <h2>A Little Inspiration</h2>
+        <p>
+          Discover ideas for your next celebration.
+          Click any photo to view it in a larger preview.
+        </p>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filters" aria-label="Filter gallery">
+        <button class="filter-btn active" data-filter="all">All Events</button>
+        <button class="filter-btn" data-filter="wedding">Weddings</button>
+        <button class="filter-btn" data-filter="birthday">Birthdays</button>
+        <button class="filter-btn" data-filter="corporate">Corporate</button>
+        <button class="filter-btn" data-filter="decor">Decor & Parties</button>
+      </div>
+
+      <!--
+        APNI PHOTOS YAHAN LAGANA
+
+        Example:
+        <img src="images/my-wedding.jpg" alt="My wedding event">
+
+        Photo ko static/images folder mein rakh sakti ho.
+      -->
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <!-- PHOTO 1 -->
+        <article class="gallery-item tall" data-category="wedding"
+          tabindex="0" role="button" aria-label="View wedding photo">
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85"
+            alt="Wedding celebration">
+          <div class="gallery-overlay">
+            <span>Wedding</span>
+            <h3>Beautiful Beginnings</h3>
+          </div>
+        </article>
+
+        <!-- PHOTO 2 -->
+        <article class="gallery-item" data-category="birthday"
+          tabindex="0" role="button" aria-label="View birthday photo">
+          <img
+            src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=85"
+            alt="Birthday party">
+          <div class="gallery-overlay">
+            <span>Birthday</span>
+            <h3>Let The Party Begin</h3>
+          </div>
+        </article>
+
+        <!-- PHOTO 3 -->
+        <article class="gallery-item" data-category="corporate"
+          tabindex="0" role="button" aria-label="View corporate event photo">
+          <img
+            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=85"
+            alt="Corporate gathering">
+          <div class="gallery-overlay">
+            <span>Corporate</span>
+            <h3>Ideas Into Action</h3>
+          </div>
+        </article>
+
+        <!-- PHOTO 4 -->
+        <article class="gallery-item wide" data-category="decor"
+          tabindex="0" role="button" aria-label="View event decoration photo">
+          <img
+            src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1400&q=85"
+            alt="Event venue decoration">
+          <div class="gallery-overlay">
+            <span>Decor & Parties</span>
+            <h3>Details That Make A Difference</h3>
+          </div>
+        </article>
+
+        <!-- PHOTO 5 -->
+        <article class="gallery-item" data-category="wedding"
+          tabindex="0" role="button" aria-label="View wedding decor photo">
+          <img
+            src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=85"
+            alt="Wedding decor">
+          <div class="gallery-overlay">
+            <span>Wedding</span>
+            <h3>A Day To Remember</h3>
+          </div>
+        </article>
+
+        <!-- PHOTO 6 -->
+        <article class="gallery-item" data-category="decor"
+          tabindex="0" role="button" aria-label="View celebration photo">
+          <img
+            src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=85"
+            alt="Celebration setup">
+          <div class="gallery-overlay">
+            <span>Decor & Parties</span>
+            <h3>Made For Celebrating</h3>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="empty-message" id="emptyMessage">
+        No photos in this category yet.
+      </p>
+
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="gallery-cta">
+      <span class="eyebrow">Your Story Starts Here</span>
+      <h2>Let's Create Your Next Memory</h2>
+      <p>
+        Have an idea for your special occasion?
+        We would love to hear about it.
+      </p>
+      <a href="/contact.html" class="gold-btn">
+        Plan Your Event ↗
+      </a>
+    </section>
+  </main>
+
+  <!-- FULL-SCREEN PHOTO PREVIEW -->
+  <div class="lightbox" id="lightbox"
+    role="dialog" aria-modal="true" aria-label="Photo preview">
+
+    <button class="lightbox-close" id="lightboxClose"
+      aria-label="Close photo preview">&times;</button>
+
+    <img id="lightboxImage" src="" alt="">
+
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © <span id="currentYear"></span>
+      EventAura. Every Moment, Beautifully Planned.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    // Gallery category filters
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.filter;
+        let visibleCount = 0;
+
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        galleryItems.forEach(item => {
+          const matches =
+            selected === "all" || item.dataset.category === selected;
+
+          item.style.display = matches ? "" : "none";
+
+          if (matches) visibleCount++;
+        });
+
+        emptyMessage.style.display = visibleCount ? "none" : "block";
+      });
+    });
+
+    // Click a photo to open the large preview
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    function openPhoto(item) {
+      const img = item.querySelector("img");
+      const title = item.querySelector(".gallery-overlay h3");
+
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+      lightboxCaption.textContent = title ? title.textContent : img.alt;
+
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+      lightboxClose.focus();
+    }
+
+    function closePhoto() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+      lightboxImage.src = "";
+    }
+
+    galleryItems.forEach(item => {
+      item.addEventListener("click", () => openPhoto(item));
+
+      item.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openPhoto(item);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener("click", closePhoto);
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) closePhoto();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && lightbox.classList.contains("open")) {
+        closePhoto();
+      }
+    });
+
+    // Current year
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>

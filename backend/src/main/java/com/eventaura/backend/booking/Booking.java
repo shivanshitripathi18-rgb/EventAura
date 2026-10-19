@@ -1,0 +1,11 @@
+package com.eventaura.backend.booking;
+import jakarta.persistence.*;import jakarta.validation.constraints.*;import java.math.BigDecimal;import java.time.LocalDate;import java.time.LocalDateTime;
+@Entity @Table(name="bookings")
+public class Booking {
+ @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;@Column(nullable=false) private Long userId;
+ @NotBlank @Column(nullable=false) private String fullName;@NotBlank @Email @Column(nullable=false) private String email;@NotBlank @Column(nullable=false) private String phone;@NotBlank @Column(nullable=false) private String eventType;
+ @NotNull @FutureOrPresent @Column(nullable=false) private LocalDate eventDate;@NotNull @Min(1) @Column(nullable=false) private Integer guests;@NotBlank @Column(nullable=false) private String city;
+ private String venue;private BigDecimal budget;private String packageName;@Column(length=3000) private String details;@Column(nullable=false) private String status="PENDING";private LocalDateTime createdAt;
+ @PrePersist public void onCreate(){createdAt=LocalDateTime.now();if(status==null||status.isBlank())status="PENDING";}
+ public Long getId(){return id;}public Long getUserId(){return userId;}public void setUserId(Long v){userId=v;}public String getFullName(){return fullName;}public void setFullName(String v){fullName=v;}public String getEmail(){return email;}public void setEmail(String v){email=v;}public String getPhone(){return phone;}public void setPhone(String v){phone=v;}public String getEventType(){return eventType;}public void setEventType(String v){eventType=v;}public LocalDate getEventDate(){return eventDate;}public void setEventDate(LocalDate v){eventDate=v;}public Integer getGuests(){return guests;}public void setGuests(Integer v){guests=v;}public String getCity(){return city;}public void setCity(String v){city=v;}public String getVenue(){return venue;}public void setVenue(String v){venue=v;}public BigDecimal getBudget(){return budget;}public void setBudget(BigDecimal v){budget=v;}public String getPackageName(){return packageName;}public void setPackageName(String v){packageName=v;}public String getDetails(){return details;}public void setDetails(String v){details=v;}public String getStatus(){return status;}public void setStatus(String v){status=v;}public LocalDateTime getCreatedAt(){return createdAt;}
+}

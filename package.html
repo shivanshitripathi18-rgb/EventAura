@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Packages | EventAura</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --gold: #b88a54;
+      --dark: #25211e;
+      --cream: #faf7f2;
+      --muted: #77716b;
+      --line: #e8dfd4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--dark);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* HERO */
+
+    .package-hero {
+      min-height: 390px;
+      padding: 80px 7%;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      background: #29211c;
+    }
+
+    .package-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+      transform: scale(1.25);
+      animation: heroReveal 1.8s ease forwards;
+    }
+
+    .package-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgba(28, 22, 18, .67);
+    }
+
+    @keyframes heroReveal {
+      from {
+        transform: scale(1.25);
+        filter: blur(5px);
+      }
+      to {
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .eyebrow {
+      color: #d9b58b;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .package-hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 6vw, 70px);
+      font-weight: normal;
+      margin: 0 0 18px;
+      animation: textReveal .8s .2s both;
+    }
+
+    .package-hero h1 span {
+      color: #e0bb8c;
+      font-style: italic;
+    }
+
+    .package-hero p {
+      max-width: 580px;
+      font-size: 14px;
+      color: #f0e8e0;
+      line-height: 1.9;
+      margin: 0;
+      animation: textReveal .8s .4s both;
+    }
+
+    @keyframes textReveal {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* INTRO */
+
+    .intro {
+      text-align: center;
+      padding: 75px 20px 25px;
+    }
+
+    .intro h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 4vw, 45px);
+      font-weight: normal;
+      margin: 10px 0 15px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    /* PRICING CARDS */
+
+    .packages-section {
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 6% 85px;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .package-card {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 36px 29px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform .35s, box-shadow .35s;
+      animation: cardReveal .7s ease both;
+    }
+
+    .package-card:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .package-card:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    @keyframes cardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .package-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(37, 30, 23, .1);
+    }
+
+    .package-card.featured {
+      border: 1px solid var(--gold);
+    }
+
+    .popular {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 9px 17px;
+      background: var(--gold);
+      color: white;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+
+    .package-number {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .package-card h3 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+
+    .package-description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 70px;
+      margin: 0 0 22px;
+    }
+
+    .price-label {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-family: Georgia, serif;
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+
+    .price-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .package-divider {
+      border: none;
+      border-top: 1px solid var(--line);
+      width: 100%;
+      margin: 0 0 24px;
+    }
+
+    .features-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 18px;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px;
+    }
+
+    .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      color: #625a53;
+    }
+
+    .features li span {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .package-btn {
+      display: block;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+      padding: 15px 12px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 11px;
+      transition: .3s;
+    }
+
+    .package-btn:hover,
+    .featured .package-btn {
+      background: var(--gold);
+      color: white;
+    }
+
+    .featured .package-btn:hover {
+      background: #9c703f;
+    }
+
+    /* CUSTOM PACKAGE */
+
+    .custom-package {
+      margin-top: 35px;
+      padding: 35px;
+      background: #eee5d9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .custom-package h3 {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: normal;
+      margin: 0 0 10px;
+    }
+
+    .custom-package p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .gold-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      padding: 15px 22px;
+      border: 1px solid var(--gold);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: .3s;
+    }
+
+    .gold-btn:hover {
+      background: transparent;
+      color: var(--dark);
+    }
+
+    /* PROCESS */
+
+    .process-section {
+      padding: 75px 6%;
+      background: #fff;
+    }
+
+    .process-inner {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .process-heading {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .process-heading h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: normal;
+      margin: 12px 0;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 35px;
+    }
+
+    .process-item {
+      text-align: center;
+      padding: 15px;
+    }
+
+    .process-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #d9bd9b;
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 22px;
+      margin: 0 auto 20px;
+    }
+
+    .process-item h3 {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+
+    .process-item p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* CTA */
+
+    .bottom-cta {
+      text-align: center;
+      padding: 80px 20px;
+      background: #29231f;
+      color: white;
+    }
+
+    .bottom-cta h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: normal;
+      margin: 10px 0 15px;
+    }
+
+    .bottom-cta p {
+      color: #d5cbc1;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 28px;
+    }
+
+    footer {
+      background: #211d1a;
+      color: #d9d0c8;
+      text-align: center;
+      padding: 28px 15px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .packages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 35px;
+      }
+
+      .package-card:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .package-hero {
+        min-height: 330px;
+        padding: 60px 6%;
+      }
+
+      .packages-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .package-card:last-child {
+        grid-column: auto;
+      }
+
+      .packages-section {
+        padding: 35px 5% 60px;
+      }
+
+      .package-card {
+        padding: 32px 25px;
+      }
+
+      .custom-package {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 23px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .package-hero::before {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo">EventAura<span>.</span></a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/gallery.html">Gallery</a>
+        <a href="/about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="package-hero">
+    <span class="eyebrow">Simple Plans, Beautiful Events</span>
+
+    <h1>Choose Your <span>Experience.</span></h1>
+
+    <p>
+      Every celebration is unique. Explore our planning options
+      and find the package that best fits your event, ideas and budget.
+    </p>
+  </section>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <span class="eyebrow">Our Packages</span>
+      <h2>Something For Every Celebration</h2>
+      <p>
+        Whether you're planning an intimate gathering or a grand occasion,
+        we'll help you shape an experience around your vision.
+      </p>
+    </section>
+
+    <!-- PACKAGE CARDS -->
+    <section class="packages-section">
+
+      <div class="packages-grid">
+
+        <!-- CLASSIC -->
+        <article class="package-card">
+
+          <div class="package-number">PACKAGE 01</div>
+
+          <h3>Classic</h3>
+
+          <p class="package-description">
+            A simple, elegant choice for intimate gatherings
+            and smaller celebrations.
+          </p>
+
+          <div class="price-label">Starting from</div>
+          <div class="price">₹15,000</div>
+          <div class="price-note">Final quote depends on your event.</div>
+
+          <hr class="package-divider">
+
+          <div class="features-title">What's included</div>
+
+          <ul class="features">
+            <li><span>✓</span> Basic event planning assistance</li>
+            <li><span>✓</span> Simple decoration setup</li>
+            <li><span>✓</span> Event theme suggestions</li>
+            <li><span>✓</span> Basic vendor coordination</li>
+            <li><span>✓</span> Event-day planning support</li>
+          </ul>
+
+          <a class="package-btn" href="/contact.html?package=Classic">
+            Choose Classic ↗
+          </a>
+
+        </article>
+
+        <!-- SIGNATURE -->
+        <article class="package-card featured">
+
+          <div class="popular">MOST POPULAR</div>
+
+          <div class="package-number">PACKAGE 02</div>
+
+          <h3>Signature</h3>
+
+          <p class="package-description">
+            A more personalized experience with thoughtful details
+            and coordinated event styling.
+          </p>
+
+          <div class="price-label">Starting from</div>
+          <div class="price">₹35,000</div>
+          <div class="price-note">Final quote depends on your event.</div>
+
+          <hr class="package-divider">
+
+          <div class="features-title">What's included</div>
+
+          <ul class="features">
+            <li><span>✓</span> Personalized event planning</li>
+            <li><span>✓</span> Theme-based decoration</li>
+            <li><span>✓</span> Venue and vendor coordination</li>
+            <li><span>✓</span> Customized event schedule</li>
+            <li><span>✓</span> Event-day coordination support</li>
+            <li><span>✓</span> Decor and layout planning</li>
+          </ul>
+
+          <a class="package-btn" href="/contact.html?package=Signature">
+            Choose Signature ↗
+          </a>
+
+        </article>
+
+        <!-- GRAND -->
+        <article class="package-card">
+
+          <div class="package-number">PACKAGE 03</div>
+
+          <h3>Grand</h3>
+
+          <p class="package-description">
+            A comprehensive planning option for larger celebrations
+            with more elaborate requirements.
+          </p>
+
+          <div class="price-label">Starting from</div>
+          <div class="price">₹75,000</div>
+          <div class="price-note">Final quote depends on your event.</div>
+
+          <hr class="package-divider">
+
+          <div class="features-title">What's included</div>
+
+          <ul class="features">
+            <li><span>✓</span> Detailed event planning</li>
+            <li><span>✓</span> Premium theme and decor planning</li>
+            <li><span>✓</span> Venue and vendor coordination</li>
+            <li><span>✓</span> Guest-flow and schedule planning</li>
+            <li><span>✓</span> Dedicated event coordination</li>
+            <li><span>✓</span> Personalized event details</li>
+          </ul>
+
+          <a class="package-btn" href="/contact.html?package=Grand">
+            Choose Grand ↗
+          </a>
+
+        </article>
+
+      </div>
+
+      <!-- CUSTOM PACKAGE -->
+      <div class="custom-package">
+        <div>
+          <h3>Need Something Different?</h3>
+          <p>
+            Tell us about your event and budget.
+            We can discuss a customized plan for your requirements.
+          </p>
+        </div>
+
+        <a href="/contact.html?package=Custom" class="gold-btn">
+          Request Custom Quote ↗
+        </a>
+      </div>
+
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="process-section">
+
+      <div class="process-inner">
+
+        <div class="process-heading">
+          <span class="eyebrow">Our Process</span>
+          <h2>Three Steps To Get Started</h2>
+        </div>
+
+        <div class="process-grid">
+
+          <article class="process-item">
+            <div class="process-icon">01</div>
+            <h3>Share Your Idea</h3>
+            <p>
+              Tell us about your occasion, preferred date,
+              guest count and event requirements.
+            </p>
+          </article>
+
+          <article class="process-item">
+            <div class="process-icon">02</div>
+            <h3>Plan Together</h3>
+            <p>
+              Discuss your preferences and receive a proposal
+              tailored to your celebration.
+            </p>
+          </article>
+
+          <article class="process-item">
+            <div class="process-icon">03</div>
+            <h3>Celebrate</h3>
+            <p>
+              Finalize the arrangements and prepare
+              for your special occasion.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="bottom-cta">
+      <span class="eyebrow">Let's Make It Special</span>
+
+      <h2>Your Event, Your Way.</h2>
+
+      <p>
+        Not sure which package to choose?
+        Share your requirements and we'll help you explore your options.
+      </p>
+
+      <a href="/contact.html" class="gold-btn">
+        Talk About Your Event ↗
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © <span id="currentYear"></span>
+      EventAura. Every Moment, Beautifully Planned.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    const year = document.getElementById("currentYear");
+
+    if (year) {
+      year.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+</html>

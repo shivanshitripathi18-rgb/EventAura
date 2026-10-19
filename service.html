@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | EventAura</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --gold: #b88a54;
+      --dark: #25211e;
+      --cream: #faf7f2;
+      --muted: #77716b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--dark);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* HERO SECTION */
+
+    .services-hero {
+      min-height: 490px;
+      padding: 90px 8%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: white;
+      background: #25211e;
+    }
+
+    .services-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+
+      /* New celebration hero image */
+      background-image: url("https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=2000&q=90");
+      background-size: cover;
+      background-position: center 55%;
+      transform: scale(1.4);
+      animation: heroImageReveal 2s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+
+    .services-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        90deg,
+        rgba(25, 20, 17, .84),
+        rgba(25, 20, 17, .42),
+        rgba(25, 20, 17, .12)
+      );
+    }
+
+    @keyframes heroImageReveal {
+      0% {
+        transform: scale(1.4);
+        filter: blur(7px);
+      }
+      100% {
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .eyebrow {
+      color: #d8b486;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .services-hero .eyebrow,
+    .services-hero h1,
+    .services-hero p,
+    .services-hero .hero-actions {
+      opacity: 0;
+      animation: heroTextReveal .8s ease forwards;
+    }
+
+    .services-hero .eyebrow {
+      animation-delay: .25s;
+    }
+
+    .services-hero h1 {
+      animation-delay: .4s;
+    }
+
+    .services-hero p {
+      animation-delay: .6s;
+    }
+
+    .services-hero .hero-actions {
+      animation-delay: .8s;
+    }
+
+    @keyframes heroTextReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .services-hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.1;
+      font-weight: normal;
+      max-width: 800px;
+      margin: 0 0 22px;
+    }
+
+    .services-hero h1 span {
+      color: #e3bd8c;
+      font-style: italic;
+    }
+
+    .services-hero p {
+      max-width: 550px;
+      color: #f0e9e2;
+      font-size: 15px;
+      line-height: 1.9;
+      margin: 0 0 30px;
+    }
+
+    .gold-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      padding: 16px 25px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      transition: .3s;
+    }
+
+    .gold-btn:hover {
+      background: transparent;
+      color: white;
+      border-color: white;
+      transform: translateY(-3px);
+    }
+
+    /* SECTION HEADING */
+
+    .services-section {
+      max-width: 1250px;
+      padding: 85px 6%;
+      margin: auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: clamp(32px, 4vw, 48px);
+      margin: 12px 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* SERVICE CARDS */
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 27px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid #eee6dc;
+      overflow: hidden;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-9px);
+      box-shadow: 0 20px 45px rgba(44, 33, 23, .12);
+    }
+
+    .image-wrap {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      background: #e8dfd5;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .7s;
+    }
+
+    .service-card:hover .image-wrap img {
+      transform: scale(1.1);
+    }
+
+    .number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, .95);
+      color: var(--dark);
+      padding: 10px 12px;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .card-content {
+      padding: 27px 24px;
+    }
+
+    .card-content h3 {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: normal;
+      margin: 0 0 13px;
+    }
+
+    .card-content p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      min-height: 74px;
+      margin: 0 0 22px;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .service-link span {
+      transition: transform .3s;
+    }
+
+    .service-link:hover span {
+      transform: translateX(6px);
+    }
+
+    /* FEATURE SECTION */
+
+    .experience {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #29231f;
+      color: white;
+    }
+
+    .experience-image {
+      min-height: 480px;
+      background:
+        url("https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1200&q=85")
+        center/cover;
+    }
+
+    .experience-content {
+      padding: 70px clamp(28px, 7vw, 100px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .experience-content h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: normal;
+      line-height: 1.2;
+      margin: 12px 0 20px;
+    }
+
+    .experience-content p {
+      color: #d4cbc3;
+      font-size: 14px;
+      line-height: 2;
+      margin-bottom: 28px;
+    }
+
+    /* WHY CHOOSE US */
+
+    .why-section {
+      padding: 80px 6%;
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .why-item {
+      padding: 28px 22px;
+      transition: transform .3s;
+    }
+
+    .why-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .why-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #d8b78f;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      color: var(--gold);
+      font-size: 25px;
+    }
+
+    .why-item h3 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 23px;
+    }
+
+    .why-item p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* BOTTOM CTA */
+
+    .final-cta {
+      text-align: center;
+      padding: 80px 20px;
+      background: #eee5d9;
+    }
+
+    .final-cta h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: normal;
+      margin: 12px 0;
+    }
+
+    .final-cta p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 auto 27px;
+    }
+
+    .final-cta .gold-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #211d1a;
+      color: #d9d0c8;
+      text-align: center;
+      padding: 28px 15px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 900px) {
+      .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .experience {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-image {
+        min-height: 350px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .services-hero {
+        min-height: 410px;
+        padding: 65px 6%;
+      }
+
+      .services-section {
+        padding: 55px 5%;
+      }
+
+      .service-grid,
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-wrap {
+        height: 235px;
+      }
+
+      .card-content p {
+        min-height: auto;
+      }
+
+      .experience-image {
+        min-height: 280px;
+      }
+
+      .experience-content {
+        padding: 50px 7%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .services-hero .eyebrow,
+      .services-hero h1,
+      .services-hero p,
+      .services-hero .hero-actions {
+        opacity: 1;
+        transform: none;
+      }
+
+      .services-hero::before {
+        transform: scale(1);
+        filter: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo">EventAura<span>.</span></a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/gallery.html">Gallery</a>
+        <a href="/packages.html">Packages</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="services-hero">
+
+    <span class="eyebrow">What We Create</span>
+
+    <h1>
+      Every Event Has a Story.<br>
+      <span>Let's Make Yours Special.</span>
+    </h1>
+
+    <p>
+      From intimate celebrations to grand occasions, we transform
+      your ideas into beautifully planned experiences filled with
+      unforgettable moments.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#our-services" class="gold-btn">
+        Explore Our Services &nbsp; ↘
+      </a>
+    </div>
+
+  </section>
+
+  <main>
+
+    <!-- ALL SERVICES -->
+    <section class="services-section" id="our-services">
+
+      <div class="section-heading">
+        <span class="eyebrow">Our Expertise</span>
+        <h2>Events Designed Around You</h2>
+        <p>
+          Every celebration deserves thoughtful planning and a personal
+          touch. Discover the perfect service for your next special occasion.
+        </p>
+      </div>
+
+      <div class="service-grid">
+
+        <!-- WEDDING -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85"
+              alt="Elegant wedding celebration"
+              loading="lazy">
+            <span class="number">01 / WEDDINGS</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Wedding Planning</h3>
+            <p>
+              Beautiful decor, venue coordination and thoughtful details
+              for your most special day.
+            </p>
+            <a class="service-link" href="/contact.html?service=Wedding">
+              Plan Your Wedding <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- BIRTHDAY -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=85"
+              alt="Colorful birthday celebration"
+              loading="lazy">
+            <span class="number">02 / BIRTHDAYS</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Birthday Celebrations</h3>
+            <p>
+              Creative themes, beautiful backdrops and fun-filled
+              celebrations for every age.
+            </p>
+            <a class="service-link" href="/contact.html?service=Birthday">
+              Celebrate With Us <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- CORPORATE -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=85"
+              alt="Corporate event and conference"
+              loading="lazy">
+            <span class="number">03 / CORPORATE</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Corporate Events</h3>
+            <p>
+              Professional conferences, product launches and business
+              gatherings planned with care.
+            </p>
+            <a class="service-link" href="/contact.html?service=Corporate">
+              Plan Your Event <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- COLLEGE FEST -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85"
+              alt="Live event with audience"
+              loading="lazy">
+            <span class="number">04 / COLLEGE FESTS</span>
+          </div>
+
+          <div class="card-content">
+            <h3>College Fests</h3>
+            <p>
+              Energetic festivals, cultural programs and memorable
+              student events full of excitement.
+            </p>
+            <a class="service-link" href="/contact.html?service=College%20Fest">
+              Create The Buzz <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- ENGAGEMENT -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=85"
+              alt="Romantic engagement celebration"
+              loading="lazy">
+            <span class="number">05 / ENGAGEMENTS</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Engagement Ceremonies</h3>
+            <p>
+              Romantic settings, elegant floral decor and special touches
+              for your beautiful new beginning.
+            </p>
+            <a class="service-link" href="/contact.html?service=Engagement">
+              Design Your Day <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- PRIVATE EVENTS -->
+        <article class="service-card">
+          <div class="image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85"
+              alt="Beautifully decorated private event"
+              loading="lazy">
+            <span class="number">06 / PRIVATE EVENTS</span>
+          </div>
+
+          <div class="card-content">
+            <h3>Private Celebrations</h3>
+            <p>
+              Anniversaries, family gatherings and special occasions
+              made uniquely yours.
+            </p>
+            <a class="service-link" href="/contact.html?service=Private%20Event">
+              Make It Personal <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- FEATURE SECTION -->
+    <section class="experience">
+
+      <div
+        class="experience-image"
+        role="img"
+        aria-label="Beautiful event venue">
+      </div>
+
+      <div class="experience-content">
+        <span class="eyebrow">More Than An Event</span>
+
+        <h2>
+          We Create Moments You Remember Forever.
+        </h2>
+
+        <p>
+          Your ideas are at the heart of every celebration. We focus on
+          creative concepts, careful coordination and the little details
+          that make your event feel truly personal.
+        </p>
+
+        <a href="/gallery.html" class="gold-btn">
+          Explore Our Gallery ↗
+        </a>
+      </div>
+
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-section">
+
+      <span class="eyebrow">The EventAura Difference</span>
+
+      <div class="section-heading">
+        <h2>Why Celebrate With Us?</h2>
+        <p>
+          A thoughtful approach to planning, from the first idea
+          to the final detail.
+        </p>
+      </div>
+
+      <div class="why-grid">
+
+        <article class="why-item">
+          <div class="why-icon">✧</div>
+          <h3>Creative Concepts</h3>
+          <p>
+            Personalized ideas and themes designed around your
+            occasion and preferences.
+          </p>
+        </article>
+
+        <article class="why-item">
+          <div class="why-icon">◇</div>
+          <h3>Careful Planning</h3>
+          <p>
+            Organized coordination to help every part of your event
+            come together smoothly.
+          </p>
+        </article>
+
+        <article class="why-item">
+          <div class="why-icon">♡</div>
+          <h3>Personal Touch</h3>
+          <p>
+            We listen to your vision and shape the experience
+            around what matters to you.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="final-cta">
+      <span class="eyebrow">Your Celebration Starts Here</span>
+
+      <h2>Have an Event in Mind?</h2>
+
+      <p>
+        Tell us your idea. Let's start planning something
+        wonderful together.
+      </p>
+
+      <a href="/contact.html" class="gold-btn">
+        Let's Plan Your Event &nbsp; ↗
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © <span id="currentYear"></span>
+      EventAura. Every Moment, Beautifully Planned.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

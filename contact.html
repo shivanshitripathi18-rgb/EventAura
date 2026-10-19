@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us | EventAura</title>
+  <meta name="description" content="Contact EventAura to discuss your wedding, birthday, corporate event or special celebration.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="/script.js" defer></script>
+
+  <style>
+    /* CONTACT HERO */
+    .contact-hero {
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      padding: 65px 9%;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(35,26,21,.88), rgba(35,26,21,.28)),
+        url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .contact-eyebrow {
+      color: #b77e5e;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .contact-hero .contact-eyebrow {
+      color: #e6bda0;
+    }
+
+    .contact-hero h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(44px, 6vw, 70px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin: 18px 0;
+    }
+
+    .contact-hero h1 em {
+      color: #e6bda0;
+    }
+
+    .contact-hero p {
+      max-width: 500px;
+      color: #f1e8e2;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* CONTACT DETAILS AND FORM */
+    .contact-main {
+      padding: 75px 8%;
+      background: #faf8f5;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 55px;
+      align-items: start;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .contact-info h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(32px, 4vw, 45px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 17px 0;
+    }
+
+    .contact-info h2 em {
+      color: #a96f51;
+    }
+
+    .contact-info > p {
+      color: #766b64;
+      font-size: 13px;
+      line-height: 2;
+      margin-bottom: 30px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-top: 1px solid #e5ddd5;
+    }
+
+    .contact-detail-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      background: #f0e8e0;
+      color: #a96f51;
+      font-size: 19px;
+    }
+
+    .contact-detail h3 {
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .contact-detail p,
+    .contact-detail a {
+      color: #766b64;
+      font-size: 12px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-detail a {
+      text-decoration: none;
+    }
+
+    .contact-detail a:hover {
+      color: #a96f51;
+    }
+
+    .contact-form-card {
+      padding: 38px;
+      background: white;
+      border: 1px solid #eee5dd;
+      box-shadow: 0 15px 50px rgba(50,35,25,.05);
+    }
+
+    .contact-form-card h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .contact-form-subtitle {
+      color: #766b64;
+      font-size: 12px;
+      line-height: 1.8;
+      margin-bottom: 27px;
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .contact-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .contact-field label {
+      color: #44372f;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 13px 12px;
+      border: 1px solid #e5ddd5;
+      border-radius: 0;
+      background: white;
+      color: #302821;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .contact-field input:focus,
+    .contact-field select:focus,
+    .contact-field textarea:focus {
+      border-color: #a96f51;
+    }
+
+    .contact-field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .contact-submit {
+      grid-column: 1 / -1;
+      width: 100%;
+      padding: 16px 20px;
+      background: #a96f51;
+      color: white;
+      border: 1px solid #a96f51;
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .contact-submit:hover {
+      background: #87553d;
+    }
+
+    .contact-status {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* GOOGLE MAP */
+    .contact-map-section {
+      padding: 70px 8%;
+      text-align: center;
+      background: #f0e8e0;
+    }
+
+    .contact-map-section h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(30px, 4vw, 43px);
+      font-weight: 400;
+      margin: 15px 0;
+    }
+
+    .contact-map-section h2 em {
+      color: #a96f51;
+    }
+
+    .contact-map-section > p {
+      max-width: 550px;
+      margin: 0 auto;
+      color: #766b64;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .contact-map-container {
+      max-width: 1100px;
+      margin: 35px auto 25px;
+      overflow: hidden;
+      background: #eee5dd;
+      border: 1px solid #e5ddd5;
+      box-shadow: 0 12px 35px rgba(50,35,25,.08);
+    }
+
+    .contact-map-container iframe {
+      display: block;
+      width: 100%;
+      height: 420px;
+      border: 0;
+    }
+
+    .contact-map-directions {
+      display: inline-block;
+      padding: 15px 24px;
+      background: #a96f51;
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: background .2s;
+    }
+
+    .contact-map-directions:hover {
+      background: #87553d;
+    }
+
+    /* BOTTOM CTA */
+    .contact-cta {
+      padding: 75px 7%;
+      text-align: center;
+      color: white;
+      background: #29231f;
+    }
+
+    .contact-cta h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 17px 0;
+    }
+
+    .contact-cta h2 em {
+      color: #e6bda0;
+    }
+
+    .contact-cta p {
+      max-width: 470px;
+      margin: 0 auto 25px;
+      color: #d1c5bd;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .contact-cta .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .contact-main {
+        padding: 55px 6%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .contact-hero {
+        min-height: 300px;
+        padding: 50px 6%;
+      }
+
+      .contact-form-card {
+        padding: 24px 18px;
+      }
+
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-field.full-width,
+      .contact-submit,
+      .contact-status {
+        grid-column: 1;
+      }
+
+      .contact-map-section {
+        padding: 55px 6%;
+      }
+
+      .contact-map-container iframe {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<a
+  href="https://wa.me/919305822691?text=Hello%20EventAura%2C%20I%20want%20to%20book%20an%20event."
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with EventAura on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path fill="currentColor" d="M16 .8A15.1 15.1 0 0 0 3.1 23.8L1 31l7.4-1.9A15.2 15.2 0 1 0 16 .8Zm0 27.6c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.4 1.1 1.2-4.3-.3-.5A12.5 12.5 0 1 1 16 28.4Zm6.9-9.4c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-.9 1.2-1.1 1.4-.2.3-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7l-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.8c.2.3 2.6 4 6.3 5.6.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5Z"/>
+  </svg>
+</a>
+
+<style>
+.whatsapp-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25D366;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 5px 18px rgba(0,0,0,.22);
+  z-index: 9999;
+  transition: transform .2s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+.whatsapp-float svg {
+  width: 34px;
+  height: 34px;
+}
+</style>
+</body>
+
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <a href="/" class="logo">
+    <span class="logo-icon">E</span>
+    <span>
+      Event<span class="logo-accent">Aura</span>
+      <small>PLAN · CELEBRATE · REMEMBER</small>
+    </span>
+  </a>
+
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    aria-label="Toggle navigation"
+    aria-expanded="false"
+    aria-controls="navLinks"
+  >☰</button>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/service.html">Services</a>
+    <a href="/gallery.html">Gallery</a>
+    <a href="/package.html">Packages</a>
+    <a href="/about.html">About</a>
+   
+  </nav>
+
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="contact-hero">
+    <div>
+      <span class="contact-eyebrow">WE'D LOVE TO HEAR FROM YOU</span>
+      <h1>Let's start a<br><em>conversation.</em></h1>
+      <p>
+        Have an event in mind, a question to ask or an idea to explore?
+        Get in touch and let's take the first step together.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT DETAILS AND FORM -->
+  <section class="contact-main">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <span class="contact-eyebrow">CONTACT EVENTAURA</span>
+        <h2>Every great plan<br>starts with <em>a hello.</em></h2>
+
+        <p>
+          Tell us about your occasion or ask us a question.
+          Share a few details and help us understand how we
+          can assist with your event planning journey.
+        </p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <div>
+            <h3>Email Us</h3>
+            <p>
+              
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=pushprajr407@gmail.com"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="email-link">
+  ✉ pushprajr407@gmail.com
+</a>
+
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">☎</div>
+          <div>
+            <h3>Call Us</h3>
+            <p>
+              <a href="tel:+919305822691">+91 93058 22691</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">⌖</div>
+          <div>
+            <h3>Our Location</h3>
+            <p>Ayodhya, Uttar Pradesh, India</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">◷</div>
+          <div>
+            <h3>Working Hours</h3>
+            <p>Monday – Saturday<br>10:00 AM – 6:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="contact-form-card">
+        <h2>Send Us a Message</h2>
+        <p class="contact-form-subtitle">
+          Fill out the form and tell us how we can help.
+        </p>
+
+        <form class="contact-form" id="contactForm">
+
+          <div class="contact-field">
+            <label for="contactName">Full Name *</label>
+            <input type="text" id="contactName" name="name"
+                   placeholder="Your full name"
+                   autocomplete="name" required>
+          </div>
+
+          <div class="contact-field">
+            <label for="contactEmail">Email Address *</label>
+            <input type="email" id="contactEmail" name="email"
+                   placeholder="you@example.com"
+                   autocomplete="email" required>
+          </div>
+
+          <div class="contact-field">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" id="contactPhone" name="phone"
+                   placeholder="Your phone number"
+                   autocomplete="tel">
+          </div>
+
+          <div class="contact-field">
+            <label for="contactSubject">Subject *</label>
+            <select id="contactSubject" name="subject" required>
+              <option value="">Choose a subject</option>
+              <option>Wedding Enquiry</option>
+              <option>Birthday Party</option>
+              <option>Corporate Event</option>
+              <option>College Fest</option>
+              <option>Package Information</option>
+              <option>General Question</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="contact-field full-width">
+            <label for="contactMessage">Your Message *</label>
+            <textarea id="contactMessage" name="message"
+                      placeholder="Tell us how we can help..."
+                      required></textarea>
+          </div>
+
+          <button type="submit" class="contact-submit">
+            SEND MESSAGE ↗
+          </button>
+
+          <p class="contact-status" id="contactStatus"
+             role="status" aria-live="polite"></p>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GOOGLE MAP -->
+  <section class="contact-map-section">
+    <span class="contact-eyebrow">FIND OUR LOCATION</span>
+    <h2>Come say <em>hello.</em></h2>
+
+    <p>
+      Find Ayodhya, Uttar Pradesh on the map and get directions.
+      Replace this sample location with your actual business address
+      if your office is somewhere else.
+    </p>
+
+    <div class="contact-map-container">
+      <iframe
+        src="https://maps.google.com/maps?q=Ayodhya%2C%20Uttar%20Pradesh%2C%20India&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="EventAura map location"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <a
+      class="contact-map-directions"
+      href="https://www.google.com/maps/search/?api=1&query=Ayodhya%2C%20Uttar%20Pradesh%2C%20India"
+      target="_blank"
+      rel="noopener noreferrer">
+      GET DIRECTIONS ↗
+    </a>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="contact-cta">
+    <span class="contact-eyebrow">READY TO PLAN?</span>
+    <h2>Your next celebration<br>starts <em>right here.</em></h2>
+    <p>
+      Share your event details and begin creating a celebration
+      that reflects your vision.
+    </p>
+    <a href="/boook.html" class="btn btn-primary">
+      Book Your Event ↗
+    </a>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-main">
+    <a href="/" class="logo footer-logo">
+      <span class="logo-icon">E</span>
+      <span>EventAura</span>
+    </a>
+
+    <p>
+      Thoughtful planning.<br>
+      Unforgettable celebrations.
+    </p>
+
+    <a href="#" class="back-top"
+       onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      BACK TO TOP ↑
+    </a>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© <span id="currentYear"></span> EventAura</span>
+    <span>Plan · Celebrate · Remember</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const status = document.getElementById("contactStatus");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    const contact = {
+        name: document.getElementById("contactName").value.trim(),
+        email: document.getElementById("contactEmail").value.trim(),
+        phone: document.getElementById("contactPhone").value.trim(),
+        subject: document.getElementById("contactSubject").value,
+        message: document.getElementById("contactMessage").value.trim()
+    };
+
+    status.textContent = "Sending your message...";
+    status.style.color = "#87553d";
+    submitButton.disabled = true;
+
+    try {
+        const response = await fetch("http://localhost:8080/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(contact)
+        });
+
+        const result = await response.text();
+
+        if (!response.ok) {
+            throw new Error(result || `Request failed: ${response.status}`);
+        }
+
+        status.textContent = "Thank you! Your message has been submitted successfully.";
+        status.style.color = "green";
+        form.reset();
+
+    } catch (error) {
+        console.error("Contact form error:", error);
+        status.textContent =
+            "Sorry, your message could not be sent. Please try again.";
+        status.style.color = "red";
+
+    } finally {
+        submitButton.disabled = false;
+    }
+});
+</script>
+
+
+</body>
+</html>

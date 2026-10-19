@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Profile | EventAura</title>
+  <meta name="description" content="Manage your EventAura profile and event bookings.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #faf8f5;
+      color: #302821;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .profile-hero {
+      padding: 65px 8%;
+      background:
+        linear-gradient(90deg, rgba(35,26,21,.9), rgba(35,26,21,.48)),
+        url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+      color: white;
+    }
+
+    .profile-hero small {
+      color: #e6bda0;
+      font-size: 10px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .profile-hero h1 {
+      font: 400 clamp(38px, 5vw, 58px)/1.2 "Playfair Display", serif;
+      margin: 16px 0 10px;
+    }
+
+    .profile-hero h1 em {
+      color: #e6bda0;
+    }
+
+    .profile-hero p {
+      color: #eee2d9;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .profile-main {
+      max-width: 1150px;
+      margin: 45px auto;
+      padding: 0 22px;
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .profile-card,
+    .details-card,
+    .booking-card {
+      background: #fff;
+      border: 1px solid #eee5dd;
+      box-shadow: 0 10px 35px rgba(50,35,25,.04);
+    }
+
+    .profile-card {
+      padding: 30px 22px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #f0e3d8;
+      color: #a96f51;
+      font: 400 38px "Playfair Display", serif;
+      border: 3px solid #e6bda0;
+    }
+
+    .profile-card h2 {
+      font: 400 25px "Playfair Display", serif;
+      margin: 0 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .profile-card > p {
+      color: #82766d;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .member-label {
+      display: inline-block;
+      margin: 12px 0 24px;
+      padding: 8px 13px;
+      background: #f7eee7;
+      color: #a96f51;
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .side-link {
+      display: block;
+      padding: 13px 12px;
+      margin-top: 7px;
+      color: #59483d;
+      text-align: left;
+      text-decoration: none;
+      font-size: 12px;
+      border-top: 1px solid #f0e8e0;
+      cursor: pointer;
+    }
+
+    .side-link:hover,
+    .side-link.active {
+      color: #a96f51;
+      background: #fcf8f4;
+    }
+
+    .logout-link {
+      color: #a43c36;
+    }
+
+    .details-card {
+      padding: 30px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font: 400 29px "Playfair Display", serif;
+    }
+
+    .section-heading p {
+      color: #82766d;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .edit-btn,
+    .save-btn,
+    .cancel-btn {
+      padding: 11px 17px;
+      border: 1px solid #a96f51;
+      background: #a96f51;
+      color: white;
+      cursor: pointer;
+      font: 600 11px "DM Sans", sans-serif;
+    }
+
+    .cancel-btn {
+      background: white;
+      color: #a96f51;
+    }
+
+    .profile-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #59483d;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #e5ddd5;
+      background: #fcfbf9;
+      font: 12px "DM Sans", sans-serif;
+      color: #302821;
+    }
+
+    .field input:disabled,
+    .field textarea:disabled {
+      color: #766b64;
+      background: #f8f6f3;
+    }
+
+    .field textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .form-status {
+      grid-column: 1 / -1;
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .booking-card {
+      padding: 28px;
+    }
+
+    .booking-card h2 {
+      margin: 0 0 12px;
+      font: 400 28px "Playfair Display", serif;
+    }
+
+    .empty-bookings {
+      padding: 25px 15px;
+      text-align: center;
+      background: #fcf8f4;
+      border: 1px dashed #dfc9b8;
+    }
+
+    .empty-bookings .symbol {
+      font-size: 32px;
+      color: #a96f51;
+    }
+
+    .empty-bookings p {
+      color: #766b64;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .primary-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 20px;
+      background: #a96f51;
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .profile-footer {
+      padding: 25px 8%;
+      text-align: center;
+      background: #29231f;
+      color: #e6d9cf;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .profile-footer a {
+      color: #e6bda0;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-hero {
+        padding: 48px 6%;
+      }
+
+      .profile-main {
+        margin: 28px auto;
+        padding: 0 15px;
+      }
+
+      .details-card {
+        padding: 22px 17px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-form {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full,
+      .form-actions,
+      .form-status {
+        grid-column: 1;
+      }
+
+      .section-heading h2 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <a href="/" class="logo">
+    <span class="logo-icon">E</span>
+    <span>
+      Event<span class="logo-accent">Aura</span>
+      <small>PLAN · CELEBRATE · REMEMBER</small>
+    </span>
+  </a>
+
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    aria-label="Toggle navigation"
+    aria-expanded="false"
+    aria-controls="navLinks">☰</button>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/service.html">Services</a>
+    <a href="/gallery.html">Gallery</a>
+    <a href="/package.html">Packages</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  
+  </nav>
+
+  <a href="/contact.html" class="auth-open-btn"
+     style="text-decoration:none">Contact Us</a>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="profile-hero">
+    <small>YOUR EVENTAURA ACCOUNT</small>
+    <h1>My <em>Profile.</em></h1>
+    <p>Manage your personal information and keep your celebrations organized.</p>
+  </section>
+
+  <section class="profile-main">
+    <div class="profile-layout">
+
+      <!-- PROFILE SIDEBAR -->
+      <aside class="profile-card">
+        <div class="avatar" id="avatar">G</div>
+        <h2 id="sidebarName">Guest User</h2>
+        <p id="sidebarEmail">Sign in to personalize your profile</p>
+        <span class="member-label">EVENTAURA MEMBER</span>
+
+        <a href="#personalDetails" class="side-link active">
+          ♙ &nbsp; Personal Information
+        </a>
+
+        <a href="#myBookings" class="side-link">
+          ♧ &nbsp; My Bookings
+        </a>
+
+        <a href="/contact.html" class="side-link">
+          ✉ &nbsp; Contact Support
+        </a>
+
+        <a href="https://wa.me/919305822691?text=Hello%20EventAura%2C%20I%20need%20help%20with%20my%20account."
+           target="_blank" rel="noopener noreferrer"
+           class="side-link">
+          ☏ &nbsp; WhatsApp Support
+        </a>
+
+        <button type="button" id="logoutBtn"
+          class="side-link logout-link"
+          style="width:100%;border-left:0;border-right:0;border-bottom:0;background:white">
+          ↪ &nbsp; Log Out
+        </button>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div>
+
+        <!-- PERSONAL DETAILS -->
+        <section class="details-card" id="personalDetails">
+          <div class="section-heading">
+            <div>
+              <h2>Personal Information</h2>
+              <p>Update your details below.</p>
+            </div>
+            <button type="button" class="edit-btn" id="editBtn">
+              EDIT PROFILE
+            </button>
+          </div>
+
+          <form class="profile-form" id="profileForm">
+
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="fullName"
+                     type="text" placeholder="Your full name"
+                     autocomplete="name" disabled required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email"
+                     type="email" placeholder="you@example.com"
+                     autocomplete="email" disabled required>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone"
+                     type="tel" placeholder="Your phone number"
+                     autocomplete="tel" disabled>
+            </div>
+
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="city"
+                     type="text" placeholder="Your city"
+                     autocomplete="address-level2" disabled>
+            </div>
+
+            <div class="field full">
+              <label for="address">Address / Additional Details</label>
+              <textarea id="address" name="address"
+                        placeholder="Enter your address or other details"
+                        disabled></textarea>
+            </div>
+
+            <div class="form-actions" id="formActions" hidden>
+              <button class="save-btn" type="submit">SAVE CHANGES</button>
+              <button class="cancel-btn" type="button" id="cancelBtn">
+                CANCEL
+              </button>
+            </div>
+
+            <p class="form-status" id="formStatus"
+               role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <!-- BOOKINGS -->
+        <section class="booking-card" id="myBookings">
+          <h2>My Bookings</h2>
+          <p style="font-size:12px;color:#82766d;line-height:1.9">
+            Your event planning journey starts here.
+          </p>
+
+          <div class="empty-bookings">
+            <div class="symbol">✧</div>
+            <h3 style="font:400 22px 'Playfair Display',serif">
+              Your celebrations await
+            </h3>
+            <p>
+              Your booking history will appear here once a booking
+              system is connected to this page.
+            </p>
+            <a href="/book.html" class="primary-link">
+              BOOK YOUR EVENT ↗
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="profile-footer">
+  <p>© <span id="currentYear"></span> EventAura · Plan · Celebrate · Remember</p>
+  <a href="/contact.html">Contact Us</a>
+  &nbsp; | &nbsp;
+  <a href="https://wa.me/919305822691"
+     target="_blank" rel="noopener noreferrer">WhatsApp Support</a>
+</footer>
+
+<script>
+  const form = document.getElementById("profileForm");
+  const inputs = [
+    document.getElementById("fullName"),
+    document.getElementById("email"),
+    document.getElementById("phone"),
+    document.getElementById("city"),
+    document.getElementById("address")
+  ];
+
+  const editBtn = document.getElementById("editBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const actions = document.getElementById("formActions");
+  const status = document.getElementById("formStatus");
+
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+  function setEditing(editing) {
+    inputs.forEach(input => input.disabled = !editing);
+    actions.hidden = !editing;
+    editBtn.hidden = editing;
+    status.textContent = "";
+  }
+
+  function updateSidebar() {
+    const name = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    document.getElementById("sidebarName").textContent =
+      name || "Guest User";
+
+    document.getElementById("sidebarEmail").textContent =
+      email || "No email added";
+
+    document.getElementById("avatar").textContent =
+      name ? name.charAt(0).toUpperCase() : "G";
+  }
+
+  function getSnapshot() {
+    return inputs.map(input => input.value);
+  }
+
+  function restoreSnapshot(values) {
+    inputs.forEach((input, index) => {
+      input.value = values[index] || "";
+    });
+  }
+
+  let originalValues = getSnapshot();
+
+  editBtn.addEventListener("click", () => {
+    originalValues = getSnapshot();
+    setEditing(true);
+    inputs[0].focus();
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    restoreSnapshot(originalValues);
+    setEditing(false);
+    updateSidebar();
+  });
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    updateSidebar();
+    setEditing(false);
+
+    status.style.color = "#87553d";
+    status.textContent =
+      "Details updated on this page. Connect a secure backend to save changes permanently.";
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    const confirmed = confirm("Do you want to log out?");
+
+    if (confirmed) {
+      alert("This demo profile does not have an authentication system connected yet.");
+    }
+  });
+
+  updateSidebar();
+</script>
+
+</body>
+</html>

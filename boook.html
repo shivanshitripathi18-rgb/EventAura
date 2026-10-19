@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Book Your Event | EventAura</title>
+  <meta name="description" content="Start planning your wedding, birthday, corporate event or celebration with EventAura.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="/script.js" defer></script>
+
+  <style>
+    .booking-hero {
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      padding: 65px 9%;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(35,26,21,.88), rgba(35,26,21,.3)),
+        url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .booking-hero h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin: 18px 0;
+    }
+
+    .booking-hero h1 em,
+    .booking-info h2 em {
+      color: #e6bda0;
+    }
+
+    .booking-hero p {
+      max-width: 520px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #f1e8e2;
+    }
+
+    .booking-eyebrow {
+      color: #b77e5e;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .booking-hero .booking-eyebrow { color: #e6bda0; }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 55px;
+      align-items: start;
+      padding: 75px 8%;
+      background: #faf8f5;
+    }
+
+    .booking-info { padding-top: 15px; }
+
+    .booking-info h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(32px, 4vw, 45px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 17px 0;
+    }
+
+    .booking-info h2 em { color: #a96f51; }
+
+    .booking-info > p {
+      font-size: 13px;
+      line-height: 2;
+      color: #766b64;
+      margin-bottom: 28px;
+    }
+
+    .booking-note {
+      display: flex;
+      gap: 15px;
+      padding: 20px 0;
+      border-top: 1px solid #e5ddd5;
+    }
+
+    .booking-note-icon { color: #a96f51; font-size: 22px; }
+    .booking-note h3 { font-size: 13px; margin-bottom: 6px; }
+
+    .booking-note p {
+      font-size: 12px;
+      line-height: 1.8;
+      color: #766b64;
+    }
+
+    .booking-form-card {
+      background: white;
+      padding: 38px;
+      border: 1px solid #eee5dd;
+      box-shadow: 0 15px 50px rgba(50,35,25,.05);
+    }
+
+    .booking-form-card h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .booking-form-subtitle {
+      color: #766b64;
+      font-size: 12px;
+      line-height: 1.8;
+      margin-bottom: 27px;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .booking-field {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .booking-field.full-width { grid-column: 1 / -1; }
+
+    .booking-field label {
+      color: #44372f;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .booking-field input,
+    .booking-field select,
+    .booking-field textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 13px 12px;
+      border: 1px solid #e5ddd5;
+      background: #fff;
+      color: #302821;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .booking-field input:focus,
+    .booking-field select:focus,
+    .booking-field textarea:focus {
+      border-color: #a96f51;
+    }
+
+    .booking-field textarea { min-height: 110px; resize: vertical; }
+
+    .booking-submit {
+      grid-column: 1 / -1;
+      width: 100%;
+      padding: 16px 20px;
+      border: 1px solid #a96f51;
+      background: #a96f51;
+      color: white;
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .booking-submit:hover { background: #87553d; }
+    .booking-submit:disabled { opacity: .6; cursor: wait; }
+
+    .booking-status {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .booking-disclaimer {
+      grid-column: 1 / -1;
+      font-size: 10px;
+      line-height: 1.8;
+      color: #766b64;
+    }
+
+    @media (max-width: 850px) {
+      .booking-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 55px 6%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .booking-hero { min-height: 300px; padding: 55px 6%; }
+      .booking-form-card { padding: 24px 18px; }
+      .booking-form { grid-template-columns: 1fr; }
+
+      .booking-field.full-width,
+      .booking-submit,
+      .booking-status,
+      .booking-disclaimer {
+        grid-column: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<header class="navbar">
+  <a href="/index.html" class="logo">
+    <span class="logo-icon">E</span>
+    <span>
+      Event<span class="logo-accent">Aura</span>
+      <small>PLAN · CELEBRATE · REMEMBER</small>
+    </span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle"
+          aria-label="Toggle navigation" aria-expanded="false"
+          aria-controls="navLinks">☰</button>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <a href="/service.html">Services</a>
+    <a href="/gallery.html">Gallery</a>
+    <a href="/package.html">Packages</a>
+    <a href="/about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <section class="booking-hero">
+    <div>
+      <span class="booking-eyebrow">LET'S PLAN SOMETHING SPECIAL</span>
+      <h1>Your event.<br>Your vision. <em>Your way.</em></h1>
+      <p>Tell us a little about your celebration. Share your ideas and requirements to get started with your event planning journey.</p>
+    </div>
+  </section>
+
+  <section class="booking-layout">
+    <div class="booking-info">
+      <span class="booking-eyebrow">START YOUR JOURNEY</span>
+      <h2>Let's make your<br>next moment <em>memorable.</em></h2>
+      <p>Every great celebration starts with a conversation. Give us the basic details and outline the event you have in mind.</p>
+
+      <div class="booking-note">
+        <span class="booking-note-icon">✦</span>
+        <div>
+          <h3>Personalized Planning</h3>
+          <p>Share your preferences, ideas and event requirements.</p>
+        </div>
+      </div>
+
+      <div class="booking-note">
+        <span class="booking-note-icon">◇</span>
+        <div>
+          <h3>Clear Requirements</h3>
+          <p>Tell us your estimated guest count, budget and preferred date.</p>
+        </div>
+      </div>
+
+      <div class="booking-note">
+        <span class="booking-note-icon">♡</span>
+        <div>
+          <h3>Made for Your Occasion</h3>
+          <p>Start building an event plan around what matters to you.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-form-card">
+      <h2>Book Your Event</h2>
+      <p class="booking-form-subtitle">Fill in the details below to submit your event enquiry.</p>
+
+      <form class="booking-form" id="bookingForm">
+        <div class="booking-field">
+          <label for="customerName">Full Name *</label>
+          <input type="text" id="customerName" name="customerName"
+                 placeholder="Enter your name" autocomplete="name" required>
+        </div>
+
+        <div class="booking-field">
+          <label for="customerEmail">Email Address *</label>
+          <input type="email" id="customerEmail" name="customerEmail"
+                 placeholder="you@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="booking-field">
+          <label for="customerPhone">Phone Number *</label>
+          <input type="tel" id="customerPhone" name="customerPhone"
+                 placeholder="Enter phone number" autocomplete="tel" required>
+        </div>
+
+        <div class="booking-field">
+          <label for="eventType">Event Type *</label>
+          <select id="eventType" name="eventType" required>
+            <option value="">Select event type</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Birthday Party">Birthday Party</option>
+            <option value="Engagement">Engagement</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Corporate Event">Corporate Event</option>
+            <option value="College Fest">College Fest</option>
+            <option value="Private Party">Private Party</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="booking-field">
+          <label for="eventDate">Preferred Event Date *</label>
+          <input type="date" id="eventDate" name="eventDate" required>
+        </div>
+
+        <div class="booking-field">
+          <label for="guestCount">Estimated Guests *</label>
+          <select id="guestCount" name="guestCount" required>
+            <option value="">Select guest count</option>
+            <option value="25">Below 50</option>
+            <option value="75">50–100</option>
+            <option value="175">101–250</option>
+            <option value="375">251–500</option>
+            <option value="750">501–1000</option>
+            <option value="1000">1000+</option>
+          </select>
+        </div>
+
+        <div class="booking-field">
+          <label for="eventCity">Event City / Venue *</label>
+          <input type="text" id="eventCity" name="eventCity"
+                 placeholder="City or preferred venue" required>
+        </div>
+
+        <div class="booking-field">
+          <label for="eventBudget">Estimated Budget</label>
+          <select id="eventBudget" name="eventBudget">
+            <option value="">Select budget</option>
+            <option value="25000">Below ₹25,000</option>
+            <option value="50000">₹25,000–₹50,000</option>
+            <option value="100000">₹50,000–₹1,00,000</option>
+            <option value="200000">₹1,00,000–₹3,00,000</option>
+            <option value="300000">₹3,00,000+</option>
+            <option value="">Not decided yet</option>
+          </select>
+        </div>
+
+        <div class="booking-field full-width">
+          <label for="eventDetails">Tell Us About Your Event</label>
+          <textarea id="eventDetails" name="eventDetails"
+                    placeholder="Describe your theme, decoration ideas, services or any special requirements..."></textarea>
+        </div>
+
+        <button type="submit" class="booking-submit">SUBMIT EVENT ENQUIRY ↗</button>
+
+        <p class="booking-disclaimer">
+          Submitting this form sends an enquiry only. Your event is not confirmed until arrangements have been discussed and agreed upon.
+        </p>
+        <p class="booking-status" id="bookingStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <a href="/index.html" class="logo footer-logo">
+      <span class="logo-icon">E</span>
+      <span>EventAura</span>
+    </a>
+    <p>Thoughtful planning.<br>Unforgettable celebrations.</p>
+    <a href="#" class="back-top"
+       onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      BACK TO TOP ↑
+    </a>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© <span id="currentYear"></span> EventAura</span>
+    <span>Plan · Celebrate · Remember</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const form = document.getElementById("bookingForm");
+  const statusBox = document.getElementById("bookingStatus");
+  const submitButton = form.querySelector('button[type="submit"]');
+  const eventDate = document.getElementById("eventDate");
+
+  // Set the minimum selectable date to today.
+  const today = new Date();
+  eventDate.min = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+
+  // This page's inline script is the only booking-form submit handler.
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const budgetValue = document.getElementById("eventBudget").value;
+
+    const payload = {
+      fullName: document.getElementById("customerName").value.trim(),
+      email: document.getElementById("customerEmail").value.trim(),
+      phone: document.getElementById("customerPhone").value.trim(),
+      eventType: document.getElementById("eventType").value,
+      eventDate: eventDate.value,
+      guests: Number(document.getElementById("guestCount").value),
+      city: document.getElementById("eventCity").value.trim(),
+      budget: budgetValue === "" ? null : Number(budgetValue),
+      details: document.getElementById("eventDetails").value.trim()
+    };
+
+    if (!Number.isInteger(payload.guests) || payload.guests < 1) {
+      statusBox.textContent = "Please select an estimated guest count.";
+      return;
+    }
+
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = "SUBMITTING...";
+      statusBox.textContent = "Submitting your enquiry...";
+
+      const response = await fetch("http://localhost:8080/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload)
+      });
+
+      const responseText = await response.text();
+
+      if (!response.ok) {
+        console.error("Booking API error:", response.status, responseText);
+
+        if (response.status === 401 || response.status === 403) {
+          throw new Error("Please log in before submitting your booking.");
+        }
+
+        if (response.status === 400) {
+          throw new Error("Booking details were rejected. Check the backend console for the validation error.");
+        }
+
+        throw new Error("Booking failed. Server status: " + response.status);
+      }
+
+      statusBox.textContent = "Your enquiry was submitted successfully!";
+      form.reset();
+
+    } catch (error) {
+      console.error("Booking submission error:", error);
+      statusBox.textContent =
+        error.message || "Could not submit your enquiry. Please try again.";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "SUBMIT EVENT ENQUIRY ↗";
+    }
+  });
+
+  // Update the footer year without changing other page behaviour.
+  const year = document.getElementById("currentYear");
+  if (year) year.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

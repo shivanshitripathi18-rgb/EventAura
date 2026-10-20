@@ -1,5 +1,5 @@
 "use strict";
-const API_BASE_URL = "https://eventaura4.onrender.com/api";
+const API_BASE_URL = "/api";
 
 // =========================================
 // 1. HELPER FUNCTIONS

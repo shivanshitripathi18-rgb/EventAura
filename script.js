@@ -627,11 +627,11 @@ async function updateNavbarAuth() {
     }
 
     try {
-        const response = await apiFetch("/auth/me", {
-            method: "GET"
-        });
+      const response = await apiFetch("/profile", {
+    method: "GET"
+});
 
-        console.log("GET /auth/me status:", response.status);
+        console.log("GET /profile status:", response.status);
 
         if (response.status === 401 || response.status === 403) {
             loginButton.hidden = false;

@@ -438,8 +438,7 @@
       submitButton.disabled = true;
       submitButton.textContent = "SUBMITTING...";
       statusBox.textContent = "Submitting your enquiry...";
-
-      const response = await fetch("http://localhost:8080/api/bookings", {
+const response = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

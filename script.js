@@ -643,7 +643,7 @@ async function updateNavbarAuth() {
 
         if (!response.ok) {
             console.error(
-                "/auth/me failed:",
+                "/profile failed:",
                 response.status,
                 result
             );

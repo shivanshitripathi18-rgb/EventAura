@@ -593,9 +593,9 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 
   try {
     const response = await fetch(
-  "https://eventaura4.onrender.com/api/profile",
+  "https://eventaura4.onrender.com/api/auth/logout",
   {
-    method: "GET",
+    method: "POST",
     credentials: "include"
   }
 );
@@ -617,9 +617,12 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 async function loadProfile() {
   try {
     const response = await fetch(
-      "http://127.0.0.1:8080/api/auth/me",
-      { credentials: "include" }
-    );
+  "https://eventaura4.onrender.com/api/profile",
+  {
+    method: "GET",
+    credentials: "include"
+  }
+);
 
     if (!response.ok) {
       document.getElementById("sidebarName").textContent = "Please Log In";
